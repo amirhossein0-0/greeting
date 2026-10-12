@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>یه سوپرایز کوچولو 💌</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600&family=Caveat:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0b0b24;
+        --ink: #f1eaff;
+        --soft: #b9a9e8;
+        --pink: #ff9fd0;
+        --purple: #a77bff;
+        --paper: #fde8e4;
+        box-sizing: border-box;
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        background: radial-gradient(circle at 50% 20%, #1d1650, var(--bg) 70%);
+        color: var(--ink);
+        font-family: Vazirmatn, Tahoma, sans-serif;
+        overflow: hidden;
+      }
+      .hand {
+        font-family: Caveat, cursive;
+        font-weight: 600;
+      }
+      #stage {
+        position: relative;
+        height: 100%;
+        max-width: 520px;
+        margin: auto;
+      }
+      .step {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 22px;
+        padding: 24px;
+        text-align: center;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(16px);
+        transition: 0.7s;
+      }
+      .step.on {
+        opacity: 1;
+        pointer-events: auto;
+        transform: none;
+      }
+      h1 {
+        font-size: 44px;
+        line-height: 1.1;
+        color: var(--pink);
+      }
+      .small {
+        font-size: 15px;
+        color: var(--soft);
+        line-height: 2;
+      }
+      .big {
+        font-size: 20px;
+        line-height: 2;
+      }
+      button {
+        font: inherit;
+        cursor: pointer;
+        border-radius: 999px;
+        padding: 12px 28px;
+        color: var(--ink);
+        border: 1.5px solid var(--purple);
+        background: transparent;
+        transition: 0.2s;
+      }
+      button.fill {
+        background: linear-gradient(135deg, #b58cff, #8f63f0);
+        border: none;
+        box-shadow: 0 6px 24px #8f63f066;
+      }
+      button:hover {
+        transform: scale(1.05);
+      }
+      .envelope {
+        width: 190px;
+        height: 130px;
+        background: #c9b3ff;
+        border-radius: 10px;
+        position: relative;
+        cursor: pointer;
+        animation: float 3s ease-in-out infinite;
+        box-shadow: 0 10px 30px #0008;
+      }
+      .envelope:before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(160deg, #d9c8ff, #b79cf5);
+        clip-path: polygon(0 0, 100% 0, 50% 58%);
+        border-radius: 10px;
+      }
+      .envelope span {
+        position: absolute;
+        left: 50%;
+        top: 48%;
+        transform: translate(-50%, -50%);
+        font-size: 26px;
+        color: #ff5e9c;
+      }
+      @keyframes float {
+        50% {
+          transform: translateY(-10px) rotate(-2deg);
+        }
+      }
+      .name {
+        font-size: 46px;
+        font-weight: 600;
+        padding: 8px 30px;
+        background: var(--pink);
+        color: #3b1850;
+        border-radius: 8px 24px 10px 26px;
+        transform: rotate(-3deg);
+        box-shadow: 0 8px 30px #ff9fd055;
+      }
+      .cake {
+        font-size: 96px;
+        cursor: pointer;
+        position: relative;
+        filter: drop-shadow(0 0 30px #ffb86666);
+      }
+      .candles {
+        display: flex;
+        gap: 14px;
+        justify-content: center;
+        height: 70px;
+        align-items: flex-end;
+        margin-bottom: -10px;
+      }
+      .candle {
+        width: 12px;
+        height: 42px;
+        border-radius: 3px;
+        background: repeating-linear-gradient(
+          45deg,
+          #ff9fd0 0 6px,
+          #fff 6px 12px
+        );
+        position: relative;
+      }
+      .candle:before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: -24px;
+        width: 12px;
+        height: 22px;
+        transform: translateX(-50%);
+        background: radial-gradient(#fff6c8, #ffb347 60%, transparent 72%);
+        border-radius: 50% 50% 50% 50%/60% 60% 40% 40%;
+        animation: fl 0.4s infinite alternate;
+        transition: 0.5s;
+      }
+      .candle.out:before {
+        opacity: 0;
+        transform: translate(-50%, -14px) scale(0.2);
+      }
+      @keyframes fl {
+        to {
+          transform: translateX(-50%) scale(1.15, 0.9) rotate(4deg);
+        }
+      }
+      .note {
+        background: var(--paper);
+        color: #4a2a45;
+        padding: 28px 24px;
+        border-radius: 6px;
+        transform: rotate(-2deg);
+        box-shadow: 0 14px 40px #000a;
+        max-width: 340px;
+        line-height: 2.1;
+        font-size: 16px;
+        position: relative;
+      }
+      .note:before {
+        content: "";
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        width: 70px;
+        height: 22px;
+        background: #b99cf099;
+        transform: translateX(-50%) rotate(3deg);
+      }
+      .note b {
+        color: #8f3f8f;
+      }
+      #fx {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 5;
+      }
+      .dots {
+        position: fixed;
+        bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+        left: 0;
+        right: 0;
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        z-index: 6;
+      }
+      .dots i {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #ffffff33;
+        transition: 0.4s;
+      }
+      .dots i.on {
+        background: var(--pink);
+        width: 22px;
+        border-radius: 6px;
+      }
+      .star {
+        position: fixed;
+        color: #ffd27a;
+        animation: tw 3s infinite alternate;
+        pointer-events: none;
+      }
+      @keyframes tw {
+        from {
+          opacity: 0.2;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="fx"></canvas>
+    <div id="stage">
+      <section class="step on">
+        <div class="hand" style="font-size: 30px">محتوای این </div>
+        <h1 class="hand" style="font-size: 58px; margin-top: -14px">
+          پاکت<br /><span style="font-size: 30px; color: var(--ink)"
+            > کاملا محرمانه است🐱‍👤</span
+          >
+        </h1>
+        <div class="envelope" onclick="go(1)"><span>♥</span></div>
+        <p class="small">
+          یه نفر امروز یه سال جذاب‌تر شده…<br />می‌خوای بدونی کیه؟
+        🙄</p>
+        <!-- <button class="fill" onclick="go(1)">نشونم بده←</button>
+          -->
+        <p>بزن رو نامه</p>
+      </section>
+
+      <section class="step">
+        <p class="big" style="color: var(--soft)">آهاااا…!</p>
+        <div class="name" id="nm"></div>
+        <p class="small">
+          حالا که متوجه شدی اون یک نفر کیه،<br />بیا یه کار جالب با هم انجام بدیم…
+        </p>
+        <button onclick="go(2)">بریم؟ ←</button>
+      </section>
+
+      <section class="step">
+        <p class="big">حالا وقتشه یه آرزوی قشنگ بکنی…</p>
+        <div>
+          <div class="candles" id="candles"></div>
+          <div class="cake" id="cake" onclick="blow()">🎂</div>
+        </div>
+        <p class="small" id="hint">روی شمع‌ها کلیک کن تا خاموش بشن!</p>
+        <button class="fill" id="n3" style="display: none" onclick="go(3)">
+          ادامه رو از دست نده ←
+        </button>
+      </section>
+
+      <section class="step">
+        <div class="note">
+          <b id="nm2"></b> عزیز ♥<br />
+          تولدت مبارک!<br />
+          امیدوارم امسال بهونه‌های بیشتری برای خندیدن داشته باشی، اتفاق‌های غیرمنتظره‌ی خوبی سر راهت قرار بگیرن و هرچیزی که ته دلت می‌خوای، یه قدم بهت نزدیک‌تر بشه.<br />
+          و البته… کلی لحظه‌ی خاص 😌<br />
+          <span class="small" style="color: #8f3f8f">روزت قشنگ، مثل خودت!</span>
+        </div>
+        <button onclick="go(4)">ادامه ←</button>
+      </section>
+
+      <section class="step">
+        <p class="big" style="color: var(--pink)">و یه چیز دیگه…</p>
+        <p class="big">
+          امیدوارم امسال کلی اتفاق قشنگ برات بیفته…<br />شاید یکی از اون
+          اتفاقا<br />همین آشنایی ما باشه 😉
+        </p>
+        <div class="hand" style="font-size: 44px; color: var(--pink)">
+          Happy Birthday
+        </div>
+        <div style="font-size: 30px; color: var(--pink)">❤</div>
+        <button onclick="boom()">به سلامتی سال جدیدت🎉</button>
+        <p class="small">این فقط یه شروعه… داستان ادامه داره</p>
+      </section>
+    </div>
+    <div class="dots" id="dots"></div>
+
+    <script>
+      /* ===== تنظیمات: اینجا رو شخصی‌سازی کن ===== */
+      const NAME = "نرگس"; // اسم او
+      /* ======================================== */
+      document.getElementById("nm").textContent = NAME;
+      document.getElementById("nm2").textContent = NAME;
+      const steps = [...document.querySelectorAll(".step")],
+        dots = document.getElementById("dots");
+      steps.forEach(() => dots.appendChild(document.createElement("i")));
+      let cur = 0;
+      function go(i) {
+        cur = i;
+        steps.forEach((s, k) => s.classList.toggle("on", k === i));
+        [...dots.children].forEach((d, k) => d.classList.toggle("on", k === i));
+        if (i === 1 || i === 3) boom();
+      }
+      go(0);
+      for (let i = 0; i < 14; i++) {
+        const s = document.createElement("div");
+        s.className = "star";
+        s.textContent = "✦";
+        s.style.cssText += `left:${Math.random() * 100}%;top:${Math.random() * 100}%;font-size:${8 + Math.random() * 10}px;animation-delay:${Math.random() * 3}s`;
+        document.body.appendChild(s);
+      }
+      const cd = document.getElementById("candles");
+      for (let i = 0; i < 5; i++) {
+        const c = document.createElement("div");
+        c.className = "candle";
+        c.style.height = 36 + Math.random() * 14 + "px";
+        c.onclick = blow;
+        cd.appendChild(c);
+      }
+      function blow() {
+        const cs = [...document.querySelectorAll(".candle")];
+        cs.forEach((c, i) => setTimeout(() => c.classList.add("out"), i * 180));
+        setTimeout(() => {
+          document.getElementById("hint").textContent =
+            "آرزوت رو توی دلت بگو… ✨";
+          document.getElementById("n3").style.display = "";
+          boom();
+        }, 1000);
+      }
+      /* confetti */
+      const cv = document.getElementById("fx"),
+        ctx = cv.getContext("2d");
+      let P = [];
+      function rs() {
+        cv.width = innerWidth;
+        cv.height = innerHeight;
+      }
+      rs();
+      addEventListener("resize", rs);
+      function boom() {
+        const cols = ["#ff9fd0", "#a77bff", "#ffd27a", "#7fe3d0", "#8fb7ff"];
+        for (let i = 0; i < 110; i++)
+          P.push({
+            x: innerWidth / 2,
+            y: innerHeight / 2.2,
+            vx: (Math.random() - 0.5) * 14,
+            vy: -Math.random() * 14 - 3,
+            w: 6 + Math.random() * 6,
+            h: 3 + Math.random() * 4,
+            r: Math.random() * 6,
+            vr: (Math.random() - 0.5) * 0.4,
+            c: cols[i % 5],
+          });
+      }
+      (function loop() {
+        ctx.clearRect(0, 0, cv.width, cv.height);
+        P = P.filter((p) => p.y < innerHeight + 20);
+        P.forEach((p) => {
+          p.vy += 0.35;
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vx *= 0.99;
+          p.r += p.vr;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.r);
+          ctx.fillStyle = p.c;
+          ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+          ctx.restore();
+        });
+        requestAnimationFrame(loop);
+      })();
+    </script>
+  </body>
+</html>
